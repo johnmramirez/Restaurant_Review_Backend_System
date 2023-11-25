@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXISTS reviews(
+CREATE TABLE IF NOT EXISTS REVIEW(
                       ID int not null AUTO_INCREMENT,
-                      restaurantName varchar(50) not null,
-                      restaurantRating varchar(3),
-                      visited DATE,
-                      review varchar(250),
+                      RESTAURANT_NAME varchar(50) not null,
+                      RESTAURANT_RATING varchar(3),
+                      VISITED DATE,
+                      REVIEW varchar(250),
                       PRIMARY KEY ( ID )
 );

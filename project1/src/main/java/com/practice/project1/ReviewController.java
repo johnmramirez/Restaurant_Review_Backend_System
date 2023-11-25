@@ -8,17 +8,17 @@ import java.util.List;
 public class ReviewController {
 
     @GetMapping("/reviews")
-    public List<RestaurantReview> getReviews(){
+    public List<Review> getReviews(){
         return null;
     }
 
     @GetMapping("/reviews/{id}")
-    public RestaurantReview getReview(@PathVariable("id") String id){
+    public Review getReview(@PathVariable("id") String id){
         return null;
     }
 
     @PostMapping("/reviews/add")
-    public void createReview(@RequestBody RestaurantReview restaurantReview){
+    public void createReview(@RequestBody Review restaurantReview){
 
     }
 

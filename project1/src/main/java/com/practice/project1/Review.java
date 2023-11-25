@@ -1,16 +1,22 @@
 package com.practice.project1;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-public class RestaurantReview {
+@Entity
+public class Review {
 
-    long id;
     String restaurantName;
-    int restaurantRating;
+    String restaurantRating;
     Date visited;
     String review;
+    private Long id;
 
-    public RestaurantReview(String restaurantName, int restaurantRating, Date visited, String review) {
+    protected Review(){}
+
+    public Review(String restaurantName, String restaurantRating, Date visited, String review) {
         this.restaurantName = restaurantName;
         this.restaurantRating = restaurantRating;
         this.visited = visited;
@@ -21,7 +27,7 @@ public class RestaurantReview {
         return restaurantName;
     }
 
-    public int getRestaurantRating() {
+    public String getRestaurantRating() {
         return restaurantRating;
     }
 
@@ -33,15 +39,11 @@ public class RestaurantReview {
         return review;
     }
 
-    public long getId() {
-        return id;
-    }
-
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
     }
 
-    public void setRestaurantRating(int restaurantRating) {
+    public void setRestaurantRating(String restaurantRating) {
         this.restaurantRating = restaurantRating;
     }
 
@@ -53,7 +55,24 @@ public class RestaurantReview {
         this.review = review;
     }
 
-    public void setId(long id) {
+
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    @Id
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "RestaurantReview{" +
+                "restaurantName='" + restaurantName + '\'' +
+                ", restaurantRating=" + restaurantRating +
+                ", visited=" + visited +
+                ", review='" + review + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
