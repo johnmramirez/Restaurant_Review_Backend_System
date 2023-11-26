@@ -1,8 +1,9 @@
 package com.practice.project1;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -12,6 +13,9 @@ public class Review {
     String restaurantRating;
     Date visited;
     String review;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     protected Review(){}
@@ -60,7 +64,6 @@ public class Review {
         this.id = id;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
@@ -75,4 +78,5 @@ public class Review {
                 ", id=" + id +
                 '}';
     }
+
 }

@@ -2,24 +2,37 @@ package com.practice.project1;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ReviewController {
 
+    private final ReviewRepository repository;
+
+    ReviewController(ReviewRepository repository){
+        this.repository = repository;
+    }
+
     @GetMapping("/reviews")
-    public List<Review> getReviews(){
-        return null;
+    public List<Review> getAllReviews(){
+        return (ArrayList<Review>) this.repository.findAll();
     }
 
     @GetMapping("/reviews/{id}")
-    public Review getReview(@PathVariable("id") String id){
-        return null;
+    public Optional<Review> getReview(@PathVariable Long id){
+        return this.repository.findById(id);
     }
 
-    @PostMapping("/reviews/add")
-    public void createReview(@RequestBody Review restaurantReview){
+    @PostMapping("/reviews")
+    public Review createReview(@RequestBody Review restaurantReview){
+        return this.repository.save(restaurantReview);
+    }
 
+    @DeleteMapping("/reviews/{id}")
+    public void deleteReview(@PathVariable Long id){
+        this.repository.deleteById(id);
     }
 
 }
