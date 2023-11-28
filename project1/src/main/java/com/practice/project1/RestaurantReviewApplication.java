@@ -17,18 +17,4 @@ public class RestaurantReviewApplication {
 		SpringApplication.run(RestaurantReviewApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner demo(ReviewRepository repository) {
-		return (args) -> {
-			// fetch all customers
-			log.info("Customers found with findAll():");
-			log.info("-------------------------------");
-			repository.findAll().forEach(customer -> {
-				log.info(customer.toString());
-			});
-			log.info("");
-
-		};
-	}
-
 }
