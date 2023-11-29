@@ -1,8 +1,5 @@
 package com.practice.project1;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
@@ -15,10 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestClientException;
-
-import java.nio.charset.StandardCharsets;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RestaurantReviewApplicationTests {
@@ -48,7 +42,7 @@ class RestaurantReviewApplicationTests {
 	}
 
 	@Test
-	public void postRequestShouldReturnCreatedReview() throws RestClientException, JSONException, JsonProcessingException {
+	public void postRequestShouldReturnCreatedReview() throws RestClientException, JSONException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
