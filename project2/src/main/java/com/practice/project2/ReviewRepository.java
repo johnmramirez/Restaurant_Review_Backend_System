@@ -1,10 +1,12 @@
 package com.practice.project2;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ReviewRepository extends CrudRepository<Review, Long> {
+import java.util.Optional;
 
-    Review findByRestaurantName(String restaurantName);
+public interface ReviewRepository extends MongoRepository<Review, String> {
 
-    Review findById(long id);
+    Optional<Review> findByRestaurantName(String restaurantName);
+
+    Optional<Review> findById(String id);
 }

@@ -1,13 +1,10 @@
 package com.practice.project2;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
 import java.util.Date;
 
-@Entity
 public class Review {
 
     String restaurantName;
@@ -18,8 +15,7 @@ public class Review {
     String review;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     protected Review(){}
 
@@ -63,11 +59,11 @@ public class Review {
     }
 
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

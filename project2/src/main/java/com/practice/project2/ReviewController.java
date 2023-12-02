@@ -17,12 +17,12 @@ public class ReviewController {
 
     @GetMapping("/reviews")
     public List<Review> getAllReviews(){
-        return (ArrayList<Review>) this.repository.findAll();
+        return this.repository.findAll();
     }
 
     @GetMapping("/reviews/{id}")
-    public Optional<Review> getReview(@PathVariable Long id){
-        return this.repository.findById(id);
+    public Review getReview(@PathVariable String id){
+        return this.repository.findById(id).get();
     }
 
     @PostMapping("/reviews")
@@ -31,7 +31,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/reviews/{id}")
-    public void deleteReview(@PathVariable Long id){
+    public void deleteReview(@PathVariable String id){
         this.repository.deleteById(id);
     }
 
