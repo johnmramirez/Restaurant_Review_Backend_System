@@ -11,7 +11,7 @@ A Java REST service that saves and serves anonymous restaurant reviews. Utilizes
 can be converted to a Docker image and deployed within a Docker container.
 
 PROJECT 2:
-A Java REST service that allows users to create a profile and submit restaurant reviews (or submit anonymously). Utilizes Java, Spring MVC, Spring Security, and MongoDB. The REST application and the MongoDB database can be converted into separate Docker images and deployed within separate Docker containers.
+A Java REST service that allows named users to submit restaurant reviews (or submit anonymously). Utilizes Java, Spring MVC, Spring Security, and MongoDB. The REST application and the MongoDB database can be converted into separate Docker images and deployed within separate Docker containers.
 
 PROJECT 3:
 A Java REST service that allows users to create a profile and submit restaurant reviews (or submit anonymously). Updates from the REST service are immediately forwarded 
