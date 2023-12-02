@@ -1,7 +1,7 @@
 package com.practice.project2;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
