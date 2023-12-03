@@ -1,7 +1,6 @@
 package com.practice.project2;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
@@ -14,7 +13,6 @@ public class Review {
     Date visited;
     String review;
 
-    @Id
     private String id;
 
     protected Review(){}
