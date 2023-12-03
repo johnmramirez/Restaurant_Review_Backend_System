@@ -20,6 +20,9 @@ public class KafkaConsumerConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
+    @Value(value = "${message.group.name}")
+    private String groupId;
+
     public ConsumerFactory<String, String> consumerFactory(String groupId) {
         Map<String, Object> props = new HashMap<>();
         props.put(
@@ -43,7 +46,7 @@ public class KafkaConsumerConfig {
 
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory("Foo"));
+        factory.setConsumerFactory(consumerFactory(groupId));
         return factory;
     }
 }
