@@ -16,10 +16,10 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.7.17'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.17'
 	runtimeOnly 'com.h2database:h2'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.17'
 }
 
 tasks.named('bootBuildImage') {
@@ -31,7 +31,7 @@ tasks.named('test') {
 }
 
 tasks.jar {
-	manifest.attributes["Main-Class"] = "com.practice.project1.RestaurantReviewApplication"
+	manifest.attributes["Main-Class"] = "com.practice.project1b.RestaurantReviewApplication"
 	from {
 		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 	}

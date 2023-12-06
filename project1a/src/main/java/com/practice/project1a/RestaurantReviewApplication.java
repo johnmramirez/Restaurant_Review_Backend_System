@@ -1,4 +1,4 @@
-package com.practice.project1;
+package com.practice.project1a;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

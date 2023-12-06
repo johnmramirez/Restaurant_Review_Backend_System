@@ -21,7 +21,7 @@ public class ReviewController {
     }
 
     @GetMapping("/reviews/{id}")
-    public Optional<Review> getReview(@PathVariable Long id){
+    public Optional<Review> getReview(@PathVariable String id){
         return this.repository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/reviews/{id}")
-    public void deleteReview(@PathVariable Long id){
+    public void deleteReview(@PathVariable String id){
         this.repository.deleteById(id);
     }
 

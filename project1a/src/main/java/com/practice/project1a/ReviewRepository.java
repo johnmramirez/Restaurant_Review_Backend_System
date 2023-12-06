@@ -1,4 +1,4 @@
-package com.practice.project1;
+package com.practice.project1a;
 
 import org.springframework.data.repository.CrudRepository;
 
