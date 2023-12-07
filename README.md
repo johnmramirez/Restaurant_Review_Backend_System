@@ -14,6 +14,5 @@ PROJECT 1b:
 A Java REST service that saves and serves anonymous restaurant reviews. Utilizes Java, Spring MVC, and a MongoDB datastore. The REST service and the MongoDB 
 database can be converted into separate Docker images and deployed within separate Docker containers.
 
-PROJECT 2:
-A Java REST service that saves and serves anonymous restaurant reviews. HTTP requests are load-balanced. Utilizes Java, Spring MVC, Eureka, and MongoDB.
-The REST application, load-balancer, and the MongoDB database can be converted into separate Docker images and deployed within separate Docker containers to scale up.
+PROJECT 2a:
+A Java REST service that saves and serves anonymous restaurant reviews. HTTP requests are routed through an API Gateway to the appropriate microservice. Utilizes Java, Spring MVC, Spring Gateway, and MongoDB. The REST application, API Gateway, and the MongoDB database can be converted into separate Docker images and deployed within separate Docker containers to scale up.
