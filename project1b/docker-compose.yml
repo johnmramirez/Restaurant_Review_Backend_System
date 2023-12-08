@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  project1b:
+    image: openjdk:11
+    container_name: "project1b"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - "./build/libs/project1b-1.0.0.jar:/app.jar"
+    command: [ 'java', '-jar', '/app.jar' ]
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: review
+    volumes:
+      - ./mongo-init/:/docker-entrypoint-initdb.d/:ro
+    ports:
+      - 27017:27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s

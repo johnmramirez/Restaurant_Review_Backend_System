@@ -1,90 +1,134 @@
-# Project 1
+# Project 1b
 
 ABOUT:
 
-A Spring REST service utilizing Java, Spring MVC, Spring JPA, and the H2 (SQL) in-memory database.
-This service receives restaurant review data comprised of: \
+A Spring REST service utilizing Java, Spring MVC, and a MongoDB database.
+This service receives restaurant review data comprised of:
 Restaurant Name, Restaurant Rating, Date visited, and the customer Review.
+
+\
+DOCKER:
+
+The entire application has been "dockerized", allowing it to be converted to a docker image
+and deployed as a Docker container. See the included docker-compose.yml for details.
+
+\
+BUILDING THE JAR:
+
+This project was compiled with Java 11. Your JAVA_HOME environment variable must be pointing to an implementation
+of Java 11.
+
+After confirming your JAVA_HOME, execute the below command within the project root:
+
+    ./gradlew bootJar
+
+The application jar will appear under /build/libs
+
+\
+CREATING THE DOCKER CONTAINERS:
+
+Execute the below command within the project root:
+
+    docker-compose up -d
+
+This will create the project1b and mongo containers. The project1b REST service will be ready
+and listening on localhost:8080. The mongo-init file within the mongo container creates a review database,
+review user, and inserts records into the review collection.
 
 
 \
 REQUESTS:
 
-The REST service supports GET, POST, and DELETE operations. Below are examples of each request:
+The REST service supports GET, POST, and DELETE operations. The README assumes you are running
+the container on your local machine. Below are examples of each request:
 
-POST REQUEST:
 
-    URI Endpoint: http://server-name:server-port/reviews
-    
-    POST /reviews HTTP/1.1
-    Host: server-name:server-port
-    Content-Type: application/json
-    Content-Length: 153
-    
-    Response:
-    {
-    "restaurantName":"Test Case 2",
-    "restaurantRating":"5/5",
-    "visited":"2023-11-29T04:13:28.585+00:00",
-    "review":"Test case review"
-    }
-
+\
 GET REQUEST
 
-    URI Endpoint: http://server-name:server-port/reviews
+    URI Endpoint: http://localhost:8080/reviews
     
     GET /reviews HTTP/1.1
-    Host: server-name:server-port
+    Host: localhost:8080
     
     Response:
-    {
-    {
-    "restaurantName": "Platos Kitchen",
-    "restaurantRating": "3/5",
-    "visited": "2015-12-17T06:00:00.000+00:00",
-    "review": "This place was great! The staff were friendly and knowledgeable.",
-    "id": 1
-    },
-    {
-    "restaurantName": "Platos Kitchen",
-    "restaurantRating": "4/5",
-    "visited": "2015-07-08T05:00:00.000+00:00",
-    "review": "Food was delicious! And the owner is really friendly.",
-    "id": 3
-    },
-    {
-    "restaurantName": "Starbix",
-    "restaurantRating": "3/5",
-    "visited": "2015-11-09T06:00:00.000+00:00",
-    "review": "Free wifi. The coffee was ok, tastes a little burnt.",
-    "id": 4
-    },
-    {
-    "restaurantName": "King Burger",
-    "restaurantRating": "3/5",
-    "visited": "2015-07-05T05:00:00.000+00:00",
-    "review": "Food was ok, at least the restrooms were spotless.",
-    "id": 5
-    }
-    }
+    [
+        {
+        "restaurantName": "Test Document 1",
+        "restaurantRating": "2/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 1",
+        "id": "657376219debf638594b8b5e"
+        },
+        {
+        "restaurantName": "Test Document 2",
+        "restaurantRating": "3/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 2",
+        "id": "657376219debf638594b8b5f"
+        },
+        {
+        "restaurantName": "Test Document 3",
+        "restaurantRating": "4/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 3",
+        "id": "657376219debf638594b8b60"
+        },
+        {
+        "restaurantName": "Test Document 4",
+        "restaurantRating": "5/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 4",
+        "id": "657376219debf638594b8b61"
+        },
+        {
+        "restaurantName": "Test Document 5",
+        "restaurantRating": "2/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 5",
+        "id": "657376219debf638594b8b62"
+        }
+    ]
 
+\
 GET REQUEST:
 
-    URI Endpoint: http://server-name:server-port/reviews/3
+    URI Endpoint: http://localhost:8080/reviews/657376219debf638594b8b62
     
     GET /reviews/3 HTTP/1.1
-    Host: server-name:server-port
+    Host: localhost:8080
+    
+    Response:
+        {
+        "restaurantName": "Test Document 5",
+        "restaurantRating": "2/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 5",
+        "id": "657376219debf638594b8b62"
+        }
+
+\
+POST REQUEST:
+
+    URI Endpoint: http://localhost:8080/reviews
+    
+    POST /reviews HTTP/1.1
+    Host: localhost:8080
+    Content-Type: application/json
+
+    Request Body:
+    {
+        "restaurantName": "Test Document 6",
+        "restaurantRating": "2/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 6",
+    }
     
     Response:
     {
-    "restaurantName": "Platos Kitchen",
-    "restaurantRating": "4/5",
-    "visited": "2015-07-08T05:00:00.000+05:00",
-    "review": "Food was delicious! And the owner is really friendly.",
-    "id": 3
+        "restaurantName": "Test Document 6",
+        "restaurantRating": "2/5",
+        "visited": "2023-12-08T20:01:37.916+00:00",
+        "review": "Test Review 6",
+        "id": "some generated id string"
     }
-\
-DOCKER:
-
-The entire application has been "dockerized", allowing it to be converted to a docker image
-and deployed as a Docker container. See the included Dockerfile for details.

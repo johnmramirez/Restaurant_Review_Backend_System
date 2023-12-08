@@ -17,7 +17,7 @@ public class ReviewController {
 
     @GetMapping("/reviews")
     public List<Review> getAllReviews(){
-        return (ArrayList<Review>) this.repository.findAll();
+        return this.repository.findAll();
     }
 
     @GetMapping("/reviews/{id}")

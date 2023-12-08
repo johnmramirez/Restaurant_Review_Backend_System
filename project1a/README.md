@@ -1,4 +1,4 @@
-# Project 1
+# Project 1a
 
 ABOUT:
 
@@ -6,18 +6,52 @@ A Spring REST service utilizing Java, Spring MVC, Spring JPA, and the H2 (SQL) i
 This service receives restaurant review data comprised of: \
 Restaurant Name, Restaurant Rating, Date visited, and the customer Review.
 
+\
+DOCKER:
+
+The entire application has been "dockerized", allowing it to be converted to a docker image
+and deployed as a Docker container. See the included Dockerfile for details.
+
+
+BUILDING THE JAR:
+
+This project was compiled with Java 11. Your JAVA_HOME environment variable must be pointing to an implementation
+of Java 11.
+
+After confirming your JAVA_HOME, execute the below command within the project root:
+
+    ./gradlew jar
+
+The application jar will appear under /build/libs
+
+\
+CREATING THE DOCKER CONTAINER:
+
+Execute the below command within the project root:
+
+    docker build -t project1a:1.0.0 .
+
+
+RUNNING THE DOCKER CONTAINER:
+
+Execute the below command within the project root:
+
+    docker run --name project1a -p 8080:8080 project1a:1.0.0
+
+
 
 \
 REQUESTS:
 
-The REST service supports GET, POST, and DELETE operations. Below are examples of each request:
+The REST service supports GET, POST, and DELETE operations. The README assumes you are running
+the container on your local machine. Below are examples of each request:
 
 POST REQUEST:
 
-    URI Endpoint: http://server-name:server-port/reviews
+    URI Endpoint: http://localhost:8080/reviews
     
     POST /reviews HTTP/1.1
-    Host: server-name:server-port
+    Host: localhost:8080
     Content-Type: application/json
     Content-Length: 153
     
@@ -31,10 +65,10 @@ POST REQUEST:
 
 GET REQUEST
 
-    URI Endpoint: http://server-name:server-port/reviews
+    URI Endpoint: http://localhost:8080/reviews
     
     GET /reviews HTTP/1.1
-    Host: server-name:server-port
+    Host: localhost:8080
     
     Response:
     {
@@ -70,10 +104,10 @@ GET REQUEST
 
 GET REQUEST:
 
-    URI Endpoint: http://server-name:server-port/reviews/3
+    URI Endpoint: http://localhost:8080/reviews/3
     
     GET /reviews/3 HTTP/1.1
-    Host: server-name:server-port
+    Host: localhost:8080
     
     Response:
     {
@@ -84,7 +118,3 @@ GET REQUEST:
     "id": 3
     }
 \
-DOCKER:
-
-The entire application has been "dockerized", allowing it to be converted to a docker image
-and deployed as a Docker container. See the included Dockerfile for details.
