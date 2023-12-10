@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+  project2b:
+    image: johnmichaelramirez/project2b:1.0.0
+    container_name: "project2b"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: always
+    expose:
+      - 8081
+    command: [ 'java', '-jar', '/app.jar' ]
+  mongo:
+    image: mongo
+    container_name: review-database
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: review
+    volumes:
+      - ./mongo-init/:/docker-entrypoint-initdb.d/:ro
+    expose:
+      - 27017
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+  cloud_gateway:
+    image: johnmichaelramirez/cloud_gateway:1.1.0
+    container_name: "cloud-gateway"
+    restart: always
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    command: [ 'java', '-jar', '/app.jar' ]
+  eureka_server:
+    image: johnmichaelramirez/eureka_server:1.0.0
+    container_name: "eureka-server"
+    restart: always
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    command: [ 'java', '-jar', '/app.jar' ]
