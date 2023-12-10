@@ -1,8 +1,7 @@
-package com.practice.project2;
+package com.practice.project2a;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,12 +14,12 @@ public class ReviewController {
         this.repository = repository;
     }
 
-    @GetMapping("/reviews")
+    @GetMapping("reviews")
     public List<Review> getAllReviews(){
         return this.repository.findAll();
     }
 
-    @GetMapping("/reviews/{id}")
+    @GetMapping("reviews/{id}")
     public Review getReview(@PathVariable String id){
         Review review = null;
         Optional<Review> optional = this.repository.findById(id);
@@ -30,12 +29,12 @@ public class ReviewController {
         return review;
     }
 
-    @PostMapping("/reviews")
+    @PostMapping("reviews")
     public Review createReview(@RequestBody Review restaurantReview){
         return this.repository.save(restaurantReview);
     }
 
-    @DeleteMapping("/reviews/{id}")
+    @DeleteMapping("reviews/{id}")
     public void deleteReview(@PathVariable String id){
         this.repository.deleteById(id);
     }

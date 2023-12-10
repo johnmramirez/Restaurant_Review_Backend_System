@@ -1,4 +1,4 @@
-package com.practice.project2;
+package com.practice.project2a;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

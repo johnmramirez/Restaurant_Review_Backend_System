@@ -1,6 +1,5 @@
-package com.practice.project2;
+package com.practice.project2a;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 
 
@@ -11,7 +10,6 @@ public class Review {
     String restaurantName;
     String restaurantRating;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss.SSS+HH:mm")
     Date visited;
     String review;
 
