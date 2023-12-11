@@ -1,8 +1,8 @@
-# Project 2a
+# Project 2b
 
 ABOUT:
 
-A Spring REST service utilizing Java, Spring MVC, Spring Cloud Gateway, and a MongoDB database.
+A Spring REST service utilizing Java, Spring MVC, Spring Cloud Gateway, Netflix Eureka Server, and a MongoDB database.
 This service receives and saves restaurant review data comprised of:
 Restaurant Name, Restaurant Rating, Date visited, and the customer Review.
 
