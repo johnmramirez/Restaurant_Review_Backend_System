@@ -1,4 +1,4 @@
-# Project 2b
+# Project 3a
 
 ABOUT:
 
@@ -32,9 +32,12 @@ Execute the below command within the project root:
 
     docker-compose up -d
 
-This will create the project2b container and pull the cloud_gateway and mongo images from the DockerHub repo. The 
+**This will create three project3a containers** and pull the cloud_gateway and mongo images from the DockerHub repo. The 
 cloud_gateway service container will be ready and listening on localhost:8080. The mongo-init file mounted to the mongo 
 container creates a review database, review user, and inserts records into the review collection.
+
+**The cloud_gateway service will automatically load balance REST requests between the three project3a containers. View
+the container logs for these services to see the HTTP requests get balanced and routed.**
 
 
 \
