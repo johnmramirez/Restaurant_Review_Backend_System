@@ -2,38 +2,24 @@ version: '3.8'
 services:
   project3a:
     image: johnmichaelramirez/project3a:1.0.1
+    restart: always
     depends_on:
       mongo:
         condition: service_healthy
-    restart: always
     deploy:
       mode: replicated
       replicas: 3
+    networks:
+      - rest-network
     expose:
       - 8081
     command: [ 'java', '-jar', '/app.jar' ]
-  mongo:
-    image: mongo
-    container_name: review-database
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: review
-    volumes:
-      - ./mongo-init/:/docker-entrypoint-initdb.d/:ro
-    expose:
-      - 27017
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
-      interval: 15s
-      timeout: 10s
-      retries: 3
-      start_period: 30s
   cloud_gateway:
     image: johnmichaelramirez/cloud_gateway:1.1.1
     container_name: "cloud-gateway"
     restart: always
+    networks:
+      - rest-network
     expose:
       - 8080
     ports:
@@ -43,8 +29,32 @@ services:
     image: johnmichaelramirez/eureka_server:1.0.0
     container_name: "eureka-server"
     restart: always
+    networks:
+      - rest-network
     expose:
       - 8761
     ports:
       - 8761:8761
     command: [ 'java', '-jar', '/app.jar' ]
+  mongo:
+    image: mongo:7.0
+    hostname: review-database
+    container_name: review-database
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: review
+    networks:
+      - rest-network
+    volumes:
+      - ./mongo-init/:/docker-entrypoint-initdb.d/:ro
+      - ../data:/data/db
+    healthcheck:
+      test: [ "CMD-SHELL", 'mongosh --eval "rs.status().ok" --quiet']
+      interval: 50s
+      timeout: 90s
+      retries: 3
+    command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
+
+networks:
+  rest-network:
+    driver: bridge

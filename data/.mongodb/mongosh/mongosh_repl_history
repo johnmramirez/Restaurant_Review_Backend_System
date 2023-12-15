@@ -1,0 +1,8 @@
+db.review.find({})
+use review
+show dbs
+db.createUser({user: 'review_user', pwd: 'password', roles: [{ role: 'readWrite', db: 'review' }]})
+db.review.find({})
+use review
+show dbs
+rs.status().ok
