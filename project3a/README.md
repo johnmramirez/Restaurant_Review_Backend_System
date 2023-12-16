@@ -40,6 +40,14 @@ container creates a review database, review user, and inserts records into the r
 the container logs for these services to see the HTTP requests get balanced and routed.**
 
 
+MONGO REPLICA SET:
+
+**The docker-compose command also creates a replica set of three MongoDB nodes.** The replica set configuration creates
+three nodes with addresses: review-database-1:27017, review-database-2:27018, review-database-3:27019. The node with 
+address review-database-1:27017 is configured with a highest priority to always be elected as the primary. All nodes are
+configured to be read from, but only the primary can be written to.
+
+
 \
 REQUESTS:
 

@@ -1,5 +1,1 @@
-let res = [
-    rs.initiate()
-]
-
-printjson(res)
+rs.initiate();

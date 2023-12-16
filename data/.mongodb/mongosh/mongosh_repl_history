@@ -1,8 +1,11 @@
+rs.reconfig(cfg)
+cfg.members[2].priority = 0.5
+cfg.members[1].priority = 0.5
+cfg = rs.conf()
 db.review.find({})
 use review
 show dbs
-db.createUser({user: 'review_user', pwd: 'password', roles: [{ role: 'readWrite', db: 'review' }]})
-db.review.find({})
-use review
+db.dropDatabase()
+use local
 show dbs
-rs.status().ok
+rs.initiate({_id:"rs0", members:[{ _id: 0, host: "review-database-1:27017"}, { _id: 1, host: "review-database-2:27018"}, { _id: 2, host: "review-database-3:27019"}]}); host: "review-database-2:27018"}, { _id: 2, host: "review-database-3:27019"}]});

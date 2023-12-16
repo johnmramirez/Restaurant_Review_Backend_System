@@ -4,7 +4,7 @@ services:
     image: johnmichaelramirez/project3a:1.0.1
     restart: always
     depends_on:
-      mongo:
+      mongo1:
         condition: service_healthy
     deploy:
       mode: replicated
@@ -36,24 +36,45 @@ services:
     ports:
       - 8761:8761
     command: [ 'java', '-jar', '/app.jar' ]
-  mongo:
+  mongo1:
     image: mongo:7.0
-    hostname: review-database
-    container_name: review-database
+    hostname: review-database-1
     restart: always
     environment:
       MONGO_INITDB_DATABASE: review
     networks:
       - rest-network
+    ports:
+      - 27017:27017
     volumes:
       - ./mongo-init/:/docker-entrypoint-initdb.d/:ro
       - ../data:/data/db
     healthcheck:
       test: [ "CMD-SHELL", 'mongosh --eval "rs.status().ok" --quiet']
-      interval: 50s
+      interval: 60s
       timeout: 90s
       retries: 3
     command: ["--replSet", "rs0", "--bind_ip_all", "--port", "27017"]
+  mongo2:
+    image: mongo:7.0
+    hostname: review-database-2
+    networks:
+      - rest-network
+    command: [ "--replSet", "rs0", "--bind_ip_all", "--port", "27018" ]
+    ports:
+      - 27018:27018
+    volumes:
+      - ../data2:/data/db
+  mongo3:
+    image: mongo:7.0
+    hostname: review-database-3
+    networks:
+      - rest-network
+    command: [ "--replSet", "rs0", "--bind_ip_all", "--port", "27019" ]
+    ports:
+      - 27019:27019
+    volumes:
+      - ../data3:/data/db
 
 networks:
   rest-network:
